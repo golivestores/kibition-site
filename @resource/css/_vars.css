@@ -1,0 +1,66 @@
+:root {
+	--vh100: calc(var(--vh, 1vh) * 100);
+
+	--wrapper: 96vw;
+    --gutter: 1.4vw;
+    --leftMargin: 2vw;
+    --col: calc((var(--wrapper) - 11*var(--gutter))/12);
+    --col-2: calc(var(--col)*2 + var(--gutter));
+    --col-3: calc(var(--col)*3 + 2*var(--gutter));
+    --col-4: calc(var(--col)*4 + 3*var(--gutter));
+    --col-5: calc(var(--col)*5 + 4*var(--gutter));
+    --col-6: calc(var(--col)*6 + 5*var(--gutter));
+    --col-7: calc(var(--col)*7 + 6*var(--gutter));
+    --col-8: calc(var(--col)*8 + 7*var(--gutter));
+    --col-9: calc(var(--col)*9 + 8*var(--gutter));
+    --col-10: calc(var(--col)*10 + 9*var(--gutter));
+    --col-11: calc(var(--col)*11 + 10*var(--gutter));
+    --col-12: calc(var(--col)*12 + 11*var(--gutter));
+    --cg1: calc((var(--wrapper) - 11*var(--gutter))/12 + var(--gutter));
+    --cg2: calc(var(--col)*2 + var(--gutter) + var(--gutter));
+    --cg3: calc(var(--col)*3 + 2*var(--gutter) + var(--gutter));
+    --cg4: calc(var(--col)*4 + 3*var(--gutter) + var(--gutter));
+    --cg5: calc(var(--col)*5 + 4*var(--gutter) + var(--gutter));
+    --cg6: calc(var(--col)*6 + 5*var(--gutter) + var(--gutter));
+    --cg7: calc(var(--col)*7 + 6*var(--gutter) + var(--gutter));
+    --cg8: calc(var(--col)*8 + 7*var(--gutter) + var(--gutter));
+    --cg9: calc(var(--col)*9 + 8*var(--gutter) + var(--gutter));
+    --cg10: calc(var(--col)*10 + 9*var(--gutter) + var(--gutter));
+    --cg11: calc(var(--col)*11 + 10*var(--gutter) + var(--gutter));
+    --cg12: calc(var(--col)*12 + 11*var(--gutter) + var(--gutter));
+    
+    /* --gutter-210: 210px;
+    --gutter-153: 153px;
+    --gutter-135: 135px;
+    --gutter-100: 100px;
+    --gutter-70: 70px; */
+}
+
+@media all and (min-width: 1921px) {
+	:root {
+        --gutter-210: 210px;
+        --gutter-205: 205px;
+        --gutter-153: 135px;
+        --gutter-135: 135px;
+        --gutter-100: 100px;
+        --gutter-70: 70px;
+	}
+}
+
+@media all and (min-width: 769px) and (max-width: 1920px) {
+	:root {
+        --gutter-210: 10.938vw;
+        --gutter-205: 10.677vw;
+        --gutter-153: 7.969vw;
+        --gutter-135: 7.031vw;
+        --gutter-100: 5.208vw;
+        --gutter-70: 3.646vw;
+	}
+}
+@media all and (max-width: 768px) {
+	:root {
+        
+	}
+}
+
+

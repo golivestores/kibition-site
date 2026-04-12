@@ -1,0 +1,53 @@
+@charset "UTF-8";
+
+a,
+a:link,
+a:visited,
+a:active,
+a:hover									{text-decoration: none; color: inherit;}
+button 									{-webkit-appearance:none; -moz-appearance: none; appearance: none; 
+	border: 0 none; font-family: inherit; color: inherit;}
+button:focus,
+a:focus									{outline-color: transparent; outline-style: none;}
+.btn 									{display: inline-block; text-align: center; vertical-align: middle; border: 0 none; outline: none; cursor: pointer; background-color: transparent;}
+
+a.btn									{text-decoration: none;}
+input.btn,
+button.btn								{overflow: visible; margin: 0; background-color: transparent;}
+a.btn									{text-decoration: none;}
+
+
+a:not(.item),
+button {background-color: transparent; -webkit-tap-highlight-color: rgba(0,0,0,0);}
+
+.btn {display: -webkit-inline-box; display: -ms-inline-flexbox; display: inline-flex;
+	-webkit-justify-content: center; -ms-flex-pack: center; justify-content: center;
+	-webkit-align-items: center; -ms-flex-align: center; align-items: center;
+	text-align:center; vertical-align: middle; border: 0 none; cursor: pointer;
+}
+
+
+/* button size */
+.btn.small {}
+.btn.medium {}
+.btn.large {height: 162px; font-weight: 500; font-size: 60px;}
+.btn.full {width: 100%;}
+@media all and (min-width: 769px) and (max-width: 1920px) {
+	.btn.large {height: 8.438vw; font-size: 3.125vw;}
+}
+@media all and (max-width: 768px) {
+	.btn.large {height: 18.667vw; font-size: 5.333vw;}
+}
+
+/* button color */
+.btn.dark {background-color: var(--brown); color: var(--white);}
+.btn.bdr {border-radius: 70px;}
+@media all and (min-width: 769px) and (max-width: 1920px) {
+	.btn.bdr {border-radius: 3.646vw;}
+}
+@media all and (max-width: 768px) {
+	.btn.bdr {border-radius: 18.667vw;}
+}
+
+/* btn disabled */
+.btn[disabled] {}
