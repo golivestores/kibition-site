@@ -5,19 +5,24 @@ jQuery(function () {
 	// CANVAS FRAME ANIMATION SETUP
 	// ============================================
 
-	// Helper: create canvas frame animation
-	function createFrameAnim(canvasId, width, height, frameCount, framePath) {
+	// Helper: create canvas frame animation (lazy — images load on demand)
+	function createFrameAnim(canvasId, width, height, frameCount, framePath, sharedImages) {
 		var canvas = document.getElementById(canvasId);
 		if (!canvas) return null;
 		var ctx = canvas.getContext("2d");
 		canvas.width = width;
 		canvas.height = height;
-		var images = [];
+		var images = sharedImages || [];
+		var loaded = sharedImages ? true : false;
 		var state = { frame: 0 };
-		for (var i = 0; i < frameCount; i++) {
-			var img = new Image();
-			img.src = framePath(i);
-			images.push(img);
+		function loadFrames() {
+			if (loaded) return;
+			loaded = true;
+			for (var i = 0; i < frameCount; i++) {
+				var img = new Image();
+				img.src = framePath(i);
+				images.push(img);
+			}
 		}
 		function render() {
 			ctx.clearRect(0, 0, canvas.width, canvas.height);
@@ -26,39 +31,34 @@ jQuery(function () {
 				ctx.drawImage(img, 0, 0, canvas.width, canvas.height);
 			}
 		}
-		return { canvas: canvas, ctx: ctx, images: images, state: state, render: render, frameCount: frameCount };
+		return { canvas: canvas, ctx: ctx, images: images, state: state, render: render, frameCount: frameCount, loadFrames: loadFrames };
 	}
-
 
 	// Smile character (green, sitting)
 	var smile = createFrameAnim("3d_Smile", 500, 500, 121, function(i) {
-		return "./@resource/images/char-smile/smile_" + (i + 1) + ".png";
+		return "./@resource/images/char-smile/smile_" + (i + 1) + ".webp";
 	});
 
 	// Blink character (pink, blinking)
 	var blink = createFrameAnim("3d_Blink", 500, 500, 121, function(i) {
-		return "./@resource/images/char-blink/blink_" + (i + 1) + ".png";
+		return "./@resource/images/char-blink/blink_" + (i + 1) + ".webp";
 	});
 
 	// Yawn character (green, yawning)
 	var yawn = createFrameAnim("3d_Yawn", 500, 500, 121, function(i) {
-		return "./@resource/images/char-yawn/yawn_" + (i + 1) + ".png";
+		return "./@resource/images/char-yawn/yawn_" + (i + 1) + ".webp";
 	});
 
 	// Group (5 characters hugging)
 	var group = createFrameAnim("3d_Group", 500, 500, 121, function(i) {
-		return "./@resource/images/char-group/group_" + (i + 1) + ".png";
+		return "./@resource/images/char-group/group_" + (i + 1) + ".webp";
 	});
 
-	// SmileCard (reuse smile frames for card section)
-	var smileCard = createFrameAnim("3d_SmileCard", 500, 500, 121, function(i) {
-		return "./@resource/images/char-smile/smile_" + (i + 1) + ".png";
-	});
+	// SmileCard — shares smile's images array (no duplicate download)
+	var smileCard = smile ? createFrameAnim("3d_SmileCard", 500, 500, 121, null, smile.images) : null;
 
-	// Character for Together section (reuse group)
-	var character = createFrameAnim("3d_Character", 500, 500, 121, function(i) {
-		return "./@resource/images/char-group/group_" + (i + 1) + ".png";
-	});
+	// Character for Together — shares group's images array
+	var character = group ? createFrameAnim("3d_Character", 500, 500, 121, null, group.images) : null;
 
 	// ============================================
 	// SMOOTH SCROLLBAR + SCROLLTRIGGER
@@ -217,6 +217,20 @@ jQuery(function () {
 		goal_scroll.to({}, { duration: 0.2 });
 
 		// Character canvas animations triggered by scroll
+		// Preload triggers — start downloading frames before section is visible
+		if (smile) {
+			ScrollTrigger.create({ trigger: ".goal", start: "top 150%", once: true, onEnter: function() { smile.loadFrames(); } });
+		}
+		if (blink) {
+			ScrollTrigger.create({ trigger: ".goal", start: "top 150%", once: true, onEnter: function() { blink.loadFrames(); } });
+		}
+		if (yawn) {
+			ScrollTrigger.create({ trigger: ".goal", start: "top 150%", once: true, onEnter: function() { yawn.loadFrames(); } });
+		}
+		if (group) {
+			ScrollTrigger.create({ trigger: ".make", start: "top 150%", once: true, onEnter: function() { group.loadFrames(); } });
+		}
+
 		if (smile) {
 			gsap.to(smile.state, {
 				frame: smile.frameCount - 1, snap: "frame", repeat: -1, ease: "none", duration: 5,
