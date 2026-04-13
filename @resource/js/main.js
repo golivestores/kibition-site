@@ -29,15 +29,6 @@ jQuery(function () {
 		return { canvas: canvas, ctx: ctx, images: images, state: state, render: render, frameCount: frameCount };
 	}
 
-	// Hero (5 characters in a row) - PC
-	var hero = createFrameAnim("heroCanvas", 1516, 500, 145, function(i) {
-		return "./@resource/images/hero/hero_" + (i + 1) + ".png";
-	});
-
-	// Hero - Mobile (reuse same frames, different canvas size)
-	var heroMo = createFrameAnim("heroCanvasMo", 1516, 500, 145, function(i) {
-		return "./@resource/images/hero/hero_" + (i + 1) + ".png";
-	});
 
 	// Smile character (green, sitting)
 	var smile = createFrameAnim("3d_Smile", 500, 500, 121, function(i) {
@@ -90,40 +81,6 @@ jQuery(function () {
 		});
 		bodyScrollBar.addListener(ScrollTrigger.update);
 		ScrollTrigger.defaults({ scroller: scroller });
-
-		// ============================================
-		// HERO CANVAS ANIMATION (auto-loop)
-		// ============================================
-		if (hero) {
-			gsap.to(hero.state, {
-				frame: hero.frameCount - 1,
-				snap: "frame",
-				repeat: -1,
-				ease: "none",
-				duration: 6,
-				onUpdate: hero.render
-			});
-		}
-		if (heroMo) {
-			gsap.to(heroMo.state, {
-				frame: heroMo.frameCount - 1,
-				snap: "frame",
-				repeat: -1,
-				ease: "none",
-				duration: 6,
-				onUpdate: heroMo.render
-			});
-		}
-
-		// Stop welcome canvas when scrolled past
-		gsap.to(".welcome", {
-			scrollTrigger: {
-				trigger: ".welcome",
-				start: "bottom top",
-				onEnter: function () { $(".welcome").addClass("stop"); },
-				onEnterBack: function () { $(".welcome").removeClass("stop"); },
-			}
-		});
 
 		// ============================================
 		// HEADER LOGO ANIMATION

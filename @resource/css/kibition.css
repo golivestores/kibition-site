@@ -34,35 +34,6 @@
 }
 
 /* ============================================
-   WELCOME (IP Characters)
-   ============================================ */
-.welcome {width: 100%; height: 100vh; background-color: var(--blush);}
-.welcome .object-wrap {position: relative;}
-.welcome.stop canvas {display: none;}
-.welcome .img-wrap {position: absolute; top: 50%; left: 50%; transform: translate(-50%,-50%);}
-@media all and (min-width: 769px) and (max-width: 1920px) {
-    .welcome .img-wrap {width: 1516px; height: 500px;}
-}
-@media all and (min-width: 769px) {
-    .welcome .p-center {padding-top: 6.667vh;}
-    .welcome .img-wrap {width: 78.958vw; height: 26.042vw;}
-}
-@media all and (max-width: 768px) {
-    .welcome .gutter-205 {display: flex; align-items: center; padding-top: 6.667vw; padding-left: 0; padding-right: 0;}
-    .welcome .object-wrap {width: 100%; height: 100%; padding-left: 2vw; padding-right: 2vw;}
-    .welcome .img-wrap {width: 100%; height: 100%;}
-    .welcome .img-wrap canvas {object-fit: contain;}
-}
-@keyframes showAni {
-    0% {opacity: 0;}
-    100% {opacity: 1;}
-}
-@keyframes hideAni {
-    0% {opacity: 1;}
-    100% {opacity: 0;}
-}
-
-/* ============================================
    ANNIVERSARY (Brand Scroll Title)
    ============================================ */
 .anniversary {position: relative; width: 100%; height: 100vh; background-color: var(--blush);}
