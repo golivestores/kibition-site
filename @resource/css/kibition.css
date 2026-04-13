@@ -116,8 +116,11 @@
 
 /* GOAL (list) 3D */
 .goal .goal-list > div {width: 100%;}
-.goal .goal-list > div.on .img-wrap canvas {display: block;}
-.goal .goal-list > div:not(.on) .img-wrap canvas {display: none;}
+.goal .goal-list > div.on .img-wrap canvas,
+.goal .goal-list > div.on .img-wrap video {display: block;}
+.goal .goal-list > div:not(.on) .img-wrap canvas,
+.goal .goal-list > div:not(.on) .img-wrap video {display: none;}
+.goal .goal-list .img-wrap video {width: 100%; height: 100%; object-fit: contain; background: transparent;}
 .goal .motion {position: relative; margin: 0 auto;}
 .goal .motion, .goal .text-wrap {max-width: 1920px;}
 .goal .goal-list .img-wrap {position: absolute; top: 0; z-index: 2; margin: 0 auto;}
@@ -132,9 +135,9 @@
 .goal .goal-list .text-wrap .text + .text {margin-top: 10px;}
 @media all and (min-width: 1921px) {
     .goal .goal-list .img-wrap {width: 392px; height: 392px;}
-    .goal .goal-list > .smile .img-wrap {margin-top: -65px; margin-left: 98px;}
-    .goal .goal-list > .blink .img-wrap {margin-top: -35px; margin-left: 240px;}
-    .goal .goal-list > .yawn .img-wrap {margin-top: -40px; margin-left: 100px;}
+    .goal .goal-list > .smile .img-wrap {margin-top: 30px; margin-left: 98px;}
+    .goal .goal-list > .blink .img-wrap {margin-top: 60px; margin-left: 240px;}
+    .goal .goal-list > .yawn .img-wrap {margin-top: 55px; margin-left: 100px;}
     .goal .goal-list .text-wrap > dl {padding-left: 405px;}
     .goal .goal-list .text-wrap .text.large {font-size: 80px;}
     .goal .goal-list .letters {margin-top: -125px;}
@@ -142,9 +145,9 @@
 }
 @media all and (min-width: 768px) and (max-width: 1920px) {
     .goal .goal-list .img-wrap {width: 20.417vw; height: 20.417vw;}
-    .goal .goal-list > .smile .img-wrap {margin-top: -3.385vw; margin-left: 5.104vw;}
-    .goal .goal-list > .blink .img-wrap {margin-top: -1.823vw; margin-left: 12.5vw;}
-    .goal .goal-list > .yawn .img-wrap {margin-top: -2.083vw; margin-left: 5.208vw;}
+    .goal .goal-list > .smile .img-wrap {margin-top: 1.563vw; margin-left: 5.104vw;}
+    .goal .goal-list > .blink .img-wrap {margin-top: 3.125vw; margin-left: 12.5vw;}
+    .goal .goal-list > .yawn .img-wrap {margin-top: 2.865vw; margin-left: 5.208vw;}
     .goal .goal-list .letters {margin-top: -6.510vw;}
     .goal .goal-list .letters > span {top: -2.604vw; font-size: 34.375vw; letter-spacing: -1.375vw;}
     .goal .goal-list .text-wrap {margin-top: -9.635vw;}

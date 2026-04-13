@@ -44,10 +44,8 @@ jQuery(function () {
 		return "./@resource/images/char-blink/blink_" + (i + 1) + ".webp";
 	});
 
-	// Yawn character (green, yawning)
-	var yawn = createFrameAnim("3d_Yawn", 500, 500, 121, function(i) {
-		return "./@resource/images/char-yawn/yawn_" + (i + 1) + ".webp";
-	});
+	// Yawn character — replaced with video element
+	var yawnVideo = document.getElementById("video_Yawn");
 
 	// Group (5 characters hugging)
 	var group = createFrameAnim("3d_Group", 500, 500, 121, function(i) {
@@ -224,8 +222,9 @@ jQuery(function () {
 		if (blink) {
 			ScrollTrigger.create({ trigger: ".goal", start: "top 150%", once: true, onEnter: function() { blink.loadFrames(); } });
 		}
-		if (yawn) {
-			ScrollTrigger.create({ trigger: ".goal", start: "top 150%", once: true, onEnter: function() { yawn.loadFrames(); } });
+		// Yawn video preload — start loading when section approaches
+		if (yawnVideo) {
+			ScrollTrigger.create({ trigger: ".goal", start: "top 150%", once: true, onEnter: function() { yawnVideo.preload = "auto"; } });
 		}
 		if (group) {
 			ScrollTrigger.create({ trigger: ".make", start: "top 150%", once: true, onEnter: function() { group.loadFrames(); } });
@@ -260,17 +259,13 @@ jQuery(function () {
 			});
 		}
 
-		if (yawn) {
-			gsap.to(yawn.state, {
-				frame: yawn.frameCount - 1, snap: "frame", repeat: -1, ease: "none", duration: 5,
-				scrollTrigger: {
-					trigger: ".yawn", start: "left 120%", end: "right -10%", containerAnimation: goal_scroll,
-					onEnter: function () { $(".yawn").addClass("on"); },
-					onEnterBack: function () { $(".yawn").addClass("on"); },
-					onLeave: function () { $(".yawn").removeClass("on"); },
-					onLeaveBack: function () { $(".yawn").removeClass("on"); },
-				},
-				onUpdate: yawn.render
+		if (yawnVideo) {
+			ScrollTrigger.create({
+				trigger: ".yawn", start: "left 120%", end: "right -10%", containerAnimation: goal_scroll,
+				onEnter: function () { $(".yawn").addClass("on"); yawnVideo.play(); },
+				onEnterBack: function () { $(".yawn").addClass("on"); yawnVideo.play(); },
+				onLeave: function () { $(".yawn").removeClass("on"); yawnVideo.pause(); },
+				onLeaveBack: function () { $(".yawn").removeClass("on"); yawnVideo.pause(); },
 			});
 		}
 
